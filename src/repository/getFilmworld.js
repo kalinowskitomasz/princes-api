@@ -5,7 +5,8 @@ const filmworld = {
 }
 
 async function getFilmworldMovies() {
-    return fetchFromApi(filmworld.movies)
+    const response = await fetchFromApi(filmworld.movies)
+    return response.Movies || []
 }
 
 module.exports = { getFilmworldMovies }
