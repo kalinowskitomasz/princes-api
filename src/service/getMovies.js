@@ -15,20 +15,12 @@ function mergeDataSources(allMovies) {
 }
 
 async function getMovies() {
-    const init = {
-        headers: { 'content-type': 'application/json;charset=UTF-8' },
-    }
-
     const allMovies = await Promise.all([
         getCinemaworldMovies(),
         getFilmworldMovies(),
     ])
 
-    const response = new Response(
-        JSON.stringify(mergeDataSources(allMovies), null, 2),
-        init
-    )
-    return response
+    return mergeDataSources(allMovies)
 }
 
 module.exports = getMovies

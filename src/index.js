@@ -1,12 +1,12 @@
 const { Router } = require('tiny-request-router')
-const getMovies = require('./service/getMovies')
+const moviesHandler = require('./controller/moviesHandler')
+const cacheResponse = require('./cacheResponse')
 
 const router = new Router()
 
-router.get('/movies', async (params, event) => {
-    console.log('ccc')
-    return getMovies()
-})
+router.get('/movies', async (params, event) =>
+    cacheResponse(moviesHandler)(params, event)
+)
 
 async function handleRequest(event) {
     const request = event.request
