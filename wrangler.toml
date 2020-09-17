@@ -1,0 +1,7 @@
+account_id = "a7a7102930435134eb4c0055aa9d5399"
+name = "princes-serverless"
+route = ""
+type = "webpack"
+workers_dev = true
+zone_id = ""
+vars = { FILMWORLD_API = "https://challenge.lexicondigital.com.au/api/filmworld", CINEMAWORLD_API = "https://challenge.lexicondigital.com.au/api/filmworld" }

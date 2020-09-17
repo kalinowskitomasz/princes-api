@@ -1,0 +1,19 @@
+{
+    "name": "prices-serverless",
+    "version": "1.0.0",
+    "description": "package for creating workers templates",
+    "main": "src/index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "format": "prettier --write '**/*.{js,css,json,md}'"
+    },
+    "author": "tomek",
+    "license": "ISC",
+    "devDependencies": {
+        "prettier": "^1.17.0"
+    },
+    "dependencies": {
+        "cloudworker-router": "^1.10.1",
+        "serverless-cloudflare-workers": "^1.2.0"
+    }
+}
