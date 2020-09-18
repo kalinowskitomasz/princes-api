@@ -1,6 +1,6 @@
-const getMovies = require('../service/getMovies')
+import getMovies from '../service/getMovies'
 
-async function moviesHandler(params, event) {
+export default async function moviesHandler(params, event) {
     const init = {
         headers: { 'content-type': 'application/json;charset=UTF-8' },
     }
@@ -11,5 +11,3 @@ async function moviesHandler(params, event) {
 
     return response
 }
-
-module.exports = moviesHandler

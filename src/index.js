@@ -1,18 +1,15 @@
-const { Router } = require('tiny-request-router')
-const moviesHandler = require('./controller/moviesHandler')
-const cacheResponse = require('./cacheResponse')
+import { Router } from 'tiny-request-router'
+import moviesHandler from './controller/moviesHandler'
+import cacheResponse from './cacheResponse'
 
 const router = new Router()
 
-router.get('/movies', async (params, event) =>
-    cacheResponse(moviesHandler)(params, event)
-)
+router.get('/movies', async (params, event) => moviesHandler(params, event))
 
 async function handleRequest(event) {
     const request = event.request
     const { pathname } = new URL(request.url)
     const match = router.match(request.method, pathname)
-    console.log('bbb')
     if (match) {
         return match.handler(match.params, event)
     } else {

@@ -1,10 +1,13 @@
-const { getCinemaworldMovies } = require('../repository/getCinemaworld')
-const { getFilmworldMovies } = require('../repository/getFilmworld')
+import { getCinemaworldMovies } from '../repository/getCinemaworld'
+import { getFilmworldMovies } from '../repository/getFilmworld'
 
 function mergeDataSources(allMovies) {
     const moviesMap = new Map()
     allMovies.forEach(source => {
         source.forEach(movie => {
+            // Take advantage of the fact that both services use
+            // IMDB id with modified prefix
+            // revert it back to original for consistency and data integrity
             const imdbId = `tt${movie.ID.slice(2)}`
             if (!moviesMap.has(imdbId)) {
                 moviesMap.set(imdbId, { ...movie, ID: imdbId })
@@ -14,7 +17,7 @@ function mergeDataSources(allMovies) {
     return [...moviesMap.values()]
 }
 
-async function getMovies() {
+export default async function getMovies() {
     const allMovies = await Promise.all([
         getCinemaworldMovies(),
         getFilmworldMovies(),
@@ -22,5 +25,3 @@ async function getMovies() {
 
     return mergeDataSources(allMovies)
 }
-
-module.exports = getMovies

@@ -1,4 +1,4 @@
-function cachedHandler(handler) {
+export default function cachedHandler(handler) {
     return async function(params, event) {
         const { request } = event
         const cacheUrl = new URL(request.url)
@@ -17,5 +17,3 @@ function cachedHandler(handler) {
         return response
     }
 }
-
-module.exports = cachedHandler
