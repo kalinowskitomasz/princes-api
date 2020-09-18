@@ -1,10 +1,11 @@
-import { getCinemaworldAllMovies, getCinemaworldMovie } from '../getCinemaworld'
+import { StatusCodes } from 'http-status-codes'
+
+import { getFilmworldAllMovies, getFilmworldMovie } from '../filmworld'
 import fetchFromApi from '../fetchFromApi'
 import HTTPError from '../../lib/HTTPError'
-import { StatusCodes } from 'http-status-codes'
 jest.mock('../fetchFromApi')
 
-describe('getCinemaworld', () => {
+describe('getFilmworldAllMovies', () => {
     beforeEach(() => {
         fetchFromApi.mockReset()
     })
@@ -12,7 +13,7 @@ describe('getCinemaworld', () => {
     test('correct response', async () => {
         fetchFromApi.mockResolvedValue({ Movies: ['aaa'] })
 
-        await expect(getCinemaworldAllMovies()).resolves.toEqual({
+        await expect(getFilmworldAllMovies()).resolves.toEqual({
             error: null,
             data: ['aaa'],
         })
@@ -21,7 +22,7 @@ describe('getCinemaworld', () => {
     test('response missing Movies falls back to an empty array', async () => {
         fetchFromApi.mockResolvedValue({})
 
-        await expect(getCinemaworldAllMovies()).resolves.toEqual({
+        await expect(getFilmworldAllMovies()).resolves.toEqual({
             error: null,
             data: [],
         })
@@ -30,24 +31,28 @@ describe('getCinemaworld', () => {
     test('failing response returns an error', async () => {
         fetchFromApi.mockRejectedValue(new HTTPError('error', 500))
 
-        await expect(getCinemaworldAllMovies()).resolves.toEqual({
+        await expect(getFilmworldAllMovies()).resolves.toEqual({
             error: new HTTPError('error', 500),
             data: [],
         })
     })
 })
 
-describe('getCinemaworldMovie', () => {
+describe('getFilmworldMovie', () => {
+    beforeEach(() => {
+        fetchFromApi.mockReset()
+    })
+
     test('returns valid response', async () => {
         const data = {
-            ID: 'cw2488496',
+            ID: 'fw2488496',
             Title: 'Star Wars: Episode VII - The Force Awakens',
             Price: 25,
         }
 
-        fetchFromApi.mockResolverValue(data)
+        fetchFromApi.mockResolvedValue(data)
 
-        await expect(getCinemaworldMovie('cw2488496')).resolves.toEqual({
+        await expect(getFilmworldMovie('fw2488496')).resolves.toEqual({
             error: null,
             data,
         })
@@ -58,7 +63,7 @@ describe('getCinemaworldMovie', () => {
             new HTTPError('error', StatusCodes.NOT_FOUND)
         )
 
-        await expect(getCinemaworldMovie('cw2488496')).resolves.toEqual({
+        await expect(getFilmworldMovie('fw2488496')).resolves.toEqual({
             error: new HTTPError('error', StatusCodes.NOT_FOUND),
             data: {},
         })

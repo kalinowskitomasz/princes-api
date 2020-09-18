@@ -1,8 +1,8 @@
 import { StatusCodes } from 'http-status-codes'
 
 import HTTPError from '../lib/HTTPError'
-import { getCinemaworldAllMovies } from '../repository/getCinemaworld'
-import { getFilmworldAllMovies } from '../repository/getFilmworld'
+import { getCinemaworldAllMovies } from '../repository/cinemaworld'
+import { getFilmworldAllMovies } from '../repository/filmworld'
 
 function mergeDataSources(allMovies) {
     const moviesMap = new Map()

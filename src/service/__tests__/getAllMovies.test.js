@@ -1,12 +1,12 @@
 import getAllMovies from '../getAllMovies'
-import { getCinemaworldAllMovies } from '../../repository/getCinemaworld'
-import { getFilmworldAllMovies } from '../../repository/getFilmworld'
+import { getCinemaworldAllMovies } from '../../repository/cinemaworld'
+import { getFilmworldAllMovies } from '../../repository/filmworld'
 import cinemaworldResponse from './cinemaworldResponse.json'
 import filmworldResponse from './filmworldResponse.json'
 import HTTPError from '../../lib/HTTPError'
 
-jest.mock('../../repository/getCinemaworld')
-jest.mock('../../repository/getFilmworld')
+jest.mock('../../repository/cinemaworld')
+jest.mock('../../repository/filmworld')
 
 describe('getAllMovies', () => {
     beforeEach(() => {
