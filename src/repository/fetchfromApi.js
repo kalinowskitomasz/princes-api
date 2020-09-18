@@ -1,6 +1,6 @@
 const numberOfRetries = 3
 
-async function fetchRetry(url, options = {}, retries) {
+export async function fetchRetry(url, options = {}, retries) {
     let res
     try {
         res = await fetch(url, options)

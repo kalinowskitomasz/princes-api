@@ -4,16 +4,31 @@
     "description": "package for creating workers templates",
     "main": "src/index.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
+        "test": "jest",
         "format": "prettier --write '**/*.{js,css,json,md}'"
     },
     "author": "tomek",
     "license": "ISC",
     "devDependencies": {
+        "@babel/preset-env": "^7.11.5",
+        "babel-jest": "^26.3.0",
+        "jest": "^26.4.2",
+        "nock": "^13.0.4",
+        "node-fetch": "^2.6.1",
         "prettier": "^1.17.0"
     },
     "dependencies": {
-        "tiny-request-router": "^1.2.2",
-        "serverless-cloudflare-workers": "^1.2.0"
+        "serverless-cloudflare-workers": "^1.2.0",
+        "tiny-request-router": "^1.2.2"
+    },
+    "jest": {
+        "setupFilesAfterEnv": [
+            "<rootDir>/lib/setupTests.js"
+        ],
+        "globals": {
+            "CINEMAWORLD_API": "https://test",
+            "FILMWORLD_API": "https://test",
+            "API_KEY": "test-key"
+        }
     }
 }
