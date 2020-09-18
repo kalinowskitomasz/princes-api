@@ -7,13 +7,13 @@ describe('getCinemaworld', () => {
         fetchFromApi.mockReset()
     })
 
-    test('correct response', () => {
+    test('correct response', async () => {
         fetchFromApi.mockResolvedValue({ Movies: ['aaa'] })
-        expect(getCinemaworldMovies()).resolves.toEqual(['aaa'])
+        await expect(getCinemaworldMovies()).resolves.toEqual(['aaa'])
     })
 
-    test('response missing Movies returns empty array', () => {
+    test('response missing Movies returns empty array', async () => {
         fetchFromApi.mockResolvedValue({})
-        expect(getCinemaworldMovies()).resolves.toEqual([])
+        await expect(getCinemaworldMovies()).resolves.toEqual([])
     })
 })

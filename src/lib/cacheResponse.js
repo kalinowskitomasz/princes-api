@@ -1,4 +1,6 @@
-export default function cachedHandler(handler) {
+const responseCacheTtl = 10 * 60 // ten minutes
+
+export default function cacheResponse(handler) {
     return async function(params, event) {
         const { request } = event
         const cacheUrl = new URL(request.url)
@@ -9,7 +11,10 @@ export default function cachedHandler(handler) {
             console.log('cache miss')
             response = await handler(params, event)
             response = new Response(response.body, response)
-            response.headers.append('Cache-Control', 'max-age=10')
+            response.headers.append(
+                'Cache-Control',
+                `max-age=${responseCacheTtl}`
+            )
             event.waitUntil(cache.put(cacheKey, response.clone()))
         } else {
             console.log('hit the cache')
