@@ -35,3 +35,31 @@ describe('getFilmworld', () => {
         })
     })
 })
+
+describe('getFilmworldMovie', () => {
+    test('returns valid response', async () => {
+        const data = {
+            ID: 'fw2488496',
+            Title: 'Star Wars: Episode VII - The Force Awakens',
+            Price: 25,
+        }
+
+        fetchFromApi.mockResolverValue(data)
+
+        await expect(getFilmworldMovie('fw2488496')).resolves.toEqual({
+            error: null,
+            data,
+        })
+    })
+
+    test('returns error', async () => {
+        fetchFromApi.mockRejectedValue(
+            new HTTPError('error', StatusCodes.NOT_FOUND)
+        )
+
+        await expect(getFilmworldMovie('fw2488496')).resolves.toEqual({
+            error: new HTTPError('error', StatusCodes.NOT_FOUND),
+            data: {},
+        })
+    })
+})

@@ -1,6 +1,7 @@
-import { getCinemaworldAllMovies } from '../getCinemaworld'
+import { getCinemaworldAllMovies, getCinemaworldMovie } from '../getCinemaworld'
 import fetchFromApi from '../fetchFromApi'
 import HTTPError from '../../lib/HTTPError'
+import { StatusCodes } from 'http-status-codes'
 jest.mock('../fetchFromApi')
 
 describe('getCinemaworld', () => {
@@ -36,6 +37,30 @@ describe('getCinemaworld', () => {
     })
 })
 
-describe('getCinemaworldSingleMovie', () => {
-    test('aaa', () => {})
+describe('getCinemaworldMovie', () => {
+    test('returns valid response', async () => {
+        const data = {
+            ID: 'cw2488496',
+            Title: 'Star Wars: Episode VII - The Force Awakens',
+            Price: 25,
+        }
+
+        fetchFromApi.mockResolverValue(data)
+
+        await expect(getCinemaworldMovie('cw2488496')).resolves.toEqual({
+            error: null,
+            data,
+        })
+    })
+
+    test('returns error', async () => {
+        fetchFromApi.mockRejectedValue(
+            new HTTPError('error', StatusCodes.NOT_FOUND)
+        )
+
+        await expect(getCinemaworldMovie('cw2488496')).resolves.toEqual({
+            error: new HTTPError('error', StatusCodes.NOT_FOUND),
+            data: {},
+        })
+    })
 })

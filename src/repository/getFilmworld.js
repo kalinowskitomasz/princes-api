@@ -15,4 +15,4 @@ export async function getFilmworldAllMovies() {
     }
 }
 
-export async function getFilmworldMovie() {}
+export async function getFilmworldMovie(id) {}
