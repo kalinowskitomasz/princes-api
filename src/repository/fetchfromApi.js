@@ -18,8 +18,6 @@ export async function fetchRetry(url, options = {}, retries) {
         throw new HTTPError(err, StatusCodes.BAD_GATEWAY)
     }
     if (res.ok) {
-        throw new HTTPError('aaa', 403)
-        // If fails on parsing just let the error bubble up to 500
         return res.json()
     }
     if (retries > 0) {
@@ -33,6 +31,7 @@ export async function fetchRetry(url, options = {}, retries) {
 }
 
 export default async function fetchFromApi(url) {
+    // TODO: add fallback to cache
     return fetchRetry(
         url,
         {

@@ -1,5 +1,6 @@
 import { fetchRetry } from '../fetchfromApi'
 import { logError } from '../../lib/logger'
+import HTTPError from '../../lib/HTTPError'
 import nock from 'nock'
 
 describe('fetchRetry', () => {
@@ -16,7 +17,7 @@ describe('fetchRetry', () => {
     test('fails once then succeess', async () => {
         nock('https://test')
             .get('/movies')
-            .reply(404, 'NotFound')
+            .reply(404, 'Not Found')
             .get('/movies')
             .reply(200, { Movies: ['aaa'] })
 
@@ -32,14 +33,26 @@ describe('fetchRetry', () => {
     test('fails while parsing json', async () => {
         nock('https://test')
             .get('/movies')
-            .reply(404, 'NotFound')
+            .reply(404, 'Not Found')
             .get('/movies')
-            .reply(200, "{ Movies: ['aaa'] }")
+            .reply(200, 'aaaa')
 
-        await expect(fetchRetry('https://test/movies', {}, 2)).resolves.toEqual(
-            {
-                Movies: ['aaa'],
-            }
+        await expect(fetchRetry('https://test/movies', {}, 2)).rejects.toThrow(
+            Error
+        )
+
+        expect(logError).toHaveBeenCalled()
+    })
+
+    test('fails on retry', async () => {
+        nock('https://test')
+            .get('/movies')
+            .reply(404, 'Not Found')
+            .get('/movies')
+            .reply(404, 'Not Found')
+
+        await expect(fetchRetry('https://test/movies', {}, 1)).rejects.toThrow(
+            HTTPError
         )
 
         expect(logError).toHaveBeenCalled()
