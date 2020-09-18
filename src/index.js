@@ -11,7 +11,9 @@ function ErrorResponse(statusCode) {
     return new Response(getReasonPhrase(statusCode), { status: statusCode })
 }
 
-router.get('/movies', async (params, event) => moviesHandler(params, event))
+router.get('/movies', async (params, event) =>
+    cacheResponse(moviesHandler)(params, event)
+)
 
 async function handleRequest(event) {
     try {
@@ -28,7 +30,7 @@ async function handleRequest(event) {
             return ErrorResponse(err.status)
         }
 
-        logError(event.request.cf, err)
+        logError(JSON.stringify(event.request.cf), JSON.stringify(err))
         return ErrorResponse(StatusCodes.INTERNAL_SERVER_ERROR)
     }
 }
