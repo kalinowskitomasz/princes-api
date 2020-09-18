@@ -1,4 +1,4 @@
-import { getFilmworldMovies } from '../getFilmworld'
+import { getFilmworldAllMovies } from '../getFilmworld'
 import fetchFromApi from '../fetchFromApi'
 import HTTPError from '../../lib/HTTPError'
 jest.mock('../fetchFromApi')
@@ -11,7 +11,7 @@ describe('getFilmworld', () => {
     test('correct response', async () => {
         fetchFromApi.mockResolvedValue({ Movies: ['aaa'] })
 
-        await expect(getFilmworldMovies()).resolves.toEqual({
+        await expect(getFilmworldAllMovies()).resolves.toEqual({
             error: null,
             data: ['aaa'],
         })
@@ -20,7 +20,7 @@ describe('getFilmworld', () => {
     test('response missing Movies falls back to an empty array', async () => {
         fetchFromApi.mockResolvedValue({})
 
-        await expect(getFilmworldMovies()).resolves.toEqual({
+        await expect(getFilmworldAllMovies()).resolves.toEqual({
             error: null,
             data: [],
         })
@@ -29,7 +29,7 @@ describe('getFilmworld', () => {
     test('failing response returns an error', async () => {
         fetchFromApi.mockRejectedValue(new HTTPError('error', 500))
 
-        await expect(getFilmworldMovies()).resolves.toEqual({
+        await expect(getFilmworldAllMovies()).resolves.toEqual({
             error: new HTTPError('error', 500),
             data: [],
         })

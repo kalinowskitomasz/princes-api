@@ -1,17 +1,17 @@
-import moviesHandler from '../moviesHandler'
-import getMovies from '../../service/getMovies'
+import allMoviesHandler from '../allMoviesHandler'
+import getAllMovies from '../../service/getAllMovies'
 import HTTPError from '../../lib/HTTPError'
 import { StatusCodes } from 'http-status-codes'
 
-jest.mock('../../service/getMovies')
+jest.mock('../../service/getAllMovies')
 
-describe('moviesHandler', () => {
+describe('allMoviesHandler', () => {
     beforeEach(() => {
-        getMovies.mockReset()
+        getAllMovies.mockReset()
     })
 
-    test('returns valid response', async () => {
-        getMovies.mockResolvedValue(
+    test('returns a valid response', async () => {
+        getAllMovies.mockResolvedValue(
             {
                 ID: 'tt2488496',
                 Poster:
@@ -28,15 +28,15 @@ describe('moviesHandler', () => {
             }
         )
         await expect(
-            moviesHandler(undefined, undefined)
+            allMoviesHandler(undefined, undefined)
         ).resolves.toMatchSnapshot()
     })
 
-    test('throws on error from getMovies', async () => {
-        getMovies.mockRejectedValue(
+    test('throws on error from getAllMovies', async () => {
+        getAllMovies.mockRejectedValue(
             new HTTPError('error', StatusCodes.NOT_FOUND)
         )
-        await expect(moviesHandler(undefined, undefined)).rejects.toThrow(
+        await expect(allMoviesHandler(undefined, undefined)).rejects.toThrow(
             HTTPError
         )
     })

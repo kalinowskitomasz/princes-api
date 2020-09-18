@@ -1,9 +1,8 @@
 import { StatusCodes } from 'http-status-codes'
 
-import moviesHandler from '../controller/moviesHandler'
 import HTTPError from '../lib/HTTPError'
-import { getCinemaworldMovies } from '../repository/getCinemaworld'
-import { getFilmworldMovies } from '../repository/getFilmworld'
+import { getCinemaworldAllMovies } from '../repository/getCinemaworld'
+import { getFilmworldAllMovies } from '../repository/getFilmworld'
 
 function mergeDataSources(allMovies) {
     const moviesMap = new Map()
@@ -21,10 +20,10 @@ function mergeDataSources(allMovies) {
     return [...moviesMap.values()]
 }
 
-export default async function getMovies() {
+export default async function getAllMovies() {
     const allMovies = await Promise.all([
-        getCinemaworldMovies(),
-        getFilmworldMovies(),
+        getCinemaworldAllMovies(),
+        getFilmworldAllMovies(),
     ])
 
     // if at least one of the sources returns
@@ -35,7 +34,7 @@ export default async function getMovies() {
     })
 
     if (!success)
-        throw new HTTPError('getMovies failed', StatusCodes.BAD_GATEWAY)
+        throw new HTTPError('getAllMovies failed', StatusCodes.BAD_GATEWAY)
 
     const moviesData = mergeDataSources(allMovies)
 

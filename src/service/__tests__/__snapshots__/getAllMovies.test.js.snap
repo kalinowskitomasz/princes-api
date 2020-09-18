@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`getMovies correct responses from both only once source 1`] = `
+exports[`getAllMovies correct responses from both only once source 1`] = `
 Array [
   Object {
     "ID": "tt2488496",
@@ -71,7 +71,7 @@ Array [
 ]
 `;
 
-exports[`getMovies correct responses from both sources 1`] = `
+exports[`getAllMovies correct responses from both sources 1`] = `
 Array [
   Object {
     "ID": "tt2488496",
@@ -142,7 +142,7 @@ Array [
 ]
 `;
 
-exports[`getMovies one of the sources returns empty data 1`] = `
+exports[`getAllMovies one of the sources returns empty data 1`] = `
 Array [
   Object {
     "ID": "tt2488496",

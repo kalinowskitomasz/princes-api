@@ -1,6 +1,7 @@
 import { Router } from 'tiny-request-router'
 import { StatusCodes, getReasonPhrase } from 'http-status-codes'
-import moviesHandler from './controller/moviesHandler'
+
+import allMoviesHandler from './controller/allMoviesHandler'
 import cacheResponse from './lib/cacheResponse'
 import HTTPError from './lib/HTTPError'
 import { logError } from './lib/logger'
@@ -12,7 +13,7 @@ function ErrorResponse(statusCode) {
 }
 
 router.get('/movies', async (params, event) =>
-    cacheResponse(moviesHandler)(params, event)
+    cacheResponse(allMoviesHandler)(params, event)
 )
 
 async function handleRequest(event) {
