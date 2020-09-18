@@ -19,6 +19,7 @@ export async function getFilmworldAllMovies() {
 export async function getFilmworldMovie(id) {
     try {
         const response = await fetchFromApi(new URL(`${filmworld.movie}/${id}`))
+        response.Source = 'Film World'
         return { error: null, data: response }
     } catch (err) {
         logError(`failed to fetch filmworld movie ${id}`, err)

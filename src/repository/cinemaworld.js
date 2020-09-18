@@ -21,6 +21,8 @@ export async function getCinemaworldMovie(id) {
         const response = await fetchFromApi(
             new URL(`${cinemaworld.movie}/${id}`)
         )
+
+        response.Source = 'Cinema World'
         return { error: null, data: response }
     } catch (err) {
         logError(`failed to fetch cinemaworld movie ${id}`, err)

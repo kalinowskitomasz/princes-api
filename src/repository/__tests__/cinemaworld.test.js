@@ -45,12 +45,6 @@ describe('getCinemaworldMovie', () => {
     })
 
     test('returns valid response', async () => {
-        const data = {
-            ID: 'cw2488496',
-            Title: 'Star Wars: Episode VII - The Force Awakens',
-            Price: 25,
-        }
-
         fetchFromApi.mockResolvedValue({
             ID: 'cw2488496',
             Title: 'Star Wars: Episode VII - The Force Awakens',
@@ -63,6 +57,7 @@ describe('getCinemaworldMovie', () => {
                 ID: 'cw2488496',
                 Title: 'Star Wars: Episode VII - The Force Awakens',
                 Price: 25,
+                Source: 'Cinema World',
             },
         })
     })

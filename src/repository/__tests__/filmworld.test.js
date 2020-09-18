@@ -44,17 +44,20 @@ describe('getFilmworldMovie', () => {
     })
 
     test('returns valid response', async () => {
-        const data = {
+        const data = fetchFromApi.mockResolvedValue({
             ID: 'fw2488496',
             Title: 'Star Wars: Episode VII - The Force Awakens',
             Price: 25,
-        }
-
-        fetchFromApi.mockResolvedValue(data)
+        })
 
         await expect(getFilmworldMovie('fw2488496')).resolves.toEqual({
             error: null,
-            data,
+            data: {
+                ID: 'fw2488496',
+                Title: 'Star Wars: Episode VII - The Force Awakens',
+                Price: 25,
+                Source: 'Film World',
+            },
         })
     })
 
