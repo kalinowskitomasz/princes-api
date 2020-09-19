@@ -815,6 +815,9 @@ Response {
     "counter": undefined,
     "headers": Headers {
       Symbol(map): Object {
+        "Access-Control-Allow-Origin": Array [
+          "https://test",
+        ],
         "content-type": Array [
           "application/json;charset=UTF-8",
         ],

@@ -41,7 +41,6 @@ describe('getMovie', () => {
                 'Cinema World': 24,
                 'Film World': 24.5,
             },
-            Source: 'Film World',
         })
     })
 })

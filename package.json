@@ -29,7 +29,8 @@
         "globals": {
             "CINEMAWORLD_API": "https://test",
             "FILMWORLD_API": "https://test",
-            "API_KEY": "test-key"
+            "API_KEY": "test-key",
+            "ALLOWED_ORIGIN": "https://test"
         }
     }
 }

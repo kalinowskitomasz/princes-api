@@ -2,6 +2,7 @@ import { StatusCodes } from 'http-status-codes'
 
 import HTTPError from '../lib/HTTPError'
 import getMovie from '../service/getMovie'
+import responseBase from '../../lib/responseBase'
 
 // starts with tt prefix, then 7-10 digits
 const imdbRegex = /^tt\d{7,10}$/
@@ -17,7 +18,5 @@ export default async function movieHandler({ id }, event) {
 
     const movieData = await getMovie(id)
 
-    return new Response(JSON.stringify(movieData, null), {
-        headers: { 'content-type': 'application/json;charset=UTF-8' },
-    })
+    return new Response(JSON.stringify(movieData, null), responseBase)
 }
