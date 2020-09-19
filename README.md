@@ -44,3 +44,9 @@ get dependencies and run
 npm install
 wrangler dev
 ```
+
+## Testing
+
+```
+npm test
+```
