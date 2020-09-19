@@ -32,11 +32,11 @@ async function handleRequest(event) {
             return ErrorResponse(StatusCodes.NOT_FOUND)
         }
     } catch (err) {
+        logError(JSON.stringify(event.request.cf), JSON.stringify(err))
         if (err instanceof HTTPError) {
             return ErrorResponse(err.status)
         }
 
-        logError(JSON.stringify(event.request.cf), JSON.stringify(err))
         return ErrorResponse(StatusCodes.INTERNAL_SERVER_ERROR)
     }
 }

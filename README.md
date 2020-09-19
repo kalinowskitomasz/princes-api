@@ -1,28 +1,46 @@
-## Router
+# Prince's API
 
-Selects the logic to respond to requests based on the `request` method and URL. Can be used with REST APIs or apps that require basic routing logic.
+Serverless API for Prince's Theatre using Cloudflare Workers
 
-[`index.js`](https://github.com/cloudflare/worker-template-router/blob/master/index.js) is the content of the Workers script.
+## API
 
-Live Demos are hosted on `workers-tooling.cf/demos/router`:
-[Demo /bar](http://workers-tooling.cf/demos/router/bar) | [Demo /foo](http://workers-tooling.cf/demos/router/foo)
+`/movies` - return list of movies available from both sources
 
-#### Wrangler
+`/movie/:id` - return movie info and pricing for a single film
 
-You can use [wrangler](https://github.com/cloudflare/wrangler) to generate a new Cloudflare Workers project based on this template by running the following command from your terminal:
+## Environment Variables
+
+|       env       |       description        |      location      |
+| :-------------: | :----------------------: | :----------------: |
+|  FILMWORLD_API  |  filmworld API endpoint  |   wrangler.toml    |
+| CINEMAWORLD_API | cinemaworld API endpoint |   wrangler.toml    |
+|     API_KEY     |         API key          | Cloudflare secrets |
+
+## Local Development
+
+### Requirements
+
+npm >= 6.0.0
+
+[wrangler CLI](https://developers.cloudflare.com/workers/).
+`npm install -g @cloudflare/wrangler`
+
+Cloudflare account
+
+### Running
+
+Change `account_id` in `wrangler.toml` file to you account id.
+More [in the documentation](https://workers.cloudflare.com/docs/quickstart/configuring-and-publishing/)
+
+then add API_KEY to secrets
 
 ```
-wrangler generate myapp https://github.com/cloudflare/worker-template-router
+wrangler put API_KEY
 ```
 
-Before publishing your code you need to edit `wrangler.toml` file and add your Cloudflare `account_id` - more information about publishing your code can be found [in the documentation](https://workers.cloudflare.com/docs/quickstart/configuring-and-publishing/).
-
-Once you are ready, you can publish your code by running the following command:
+get dependencies and run
 
 ```
-wrangler publish
+npm install
+wrangler dev
 ```
-
-#### Serverless
-
-To deploy using serverless add a [`serverless.yml`](https://serverless.com/framework/docs/providers/cloudflare/) file.
