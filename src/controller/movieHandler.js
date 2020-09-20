@@ -2,7 +2,7 @@ import { StatusCodes } from 'http-status-codes'
 
 import HTTPError from '../lib/HTTPError'
 import getMovie from '../service/getMovie'
-import responseBase from '../../lib/responseBase'
+import responseBase from '../lib/responseBase'
 
 // starts with tt prefix, then 7-10 digits
 const imdbRegex = /^tt\d{7,10}$/

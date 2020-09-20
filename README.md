@@ -6,7 +6,7 @@ Serverless API for Prince's Theatre using Cloudflare Workers
 
 `/movies` - return list of movies available from both sources
 
-`/movie/:id` - return movie info and pricing for a single film
+`/movie/:id` - return movie info and pricing for a single film, id has to be valid IMDB id (7-10 digi   ts prefixed with 'tt')
 
 ## Environment Variables
 

@@ -6,11 +6,16 @@ import movieHandler from './controller/movieHandler'
 import cacheResponse from './lib/cacheResponse'
 import HTTPError from './lib/HTTPError'
 import { logError } from './lib/logger'
+import responseBase from './lib/responseBase'
 
 const router = new Router()
 
 function ErrorResponse(statusCode) {
-    return new Response(getReasonPhrase(statusCode), { status: statusCode })
+    return new Response(
+        getReasonPhrase(statusCode),
+        { status: statusCode },
+        responseBase
+    )
 }
 
 router.get('/movies', async (params, event) =>
