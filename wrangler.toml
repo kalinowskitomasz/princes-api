@@ -2,7 +2,7 @@ account_id = "a7a7102930435134eb4c0055aa9d5399"
 name = "princes-api"
 route = ""
 type = "webpack"
-vars = {FILMWORLD_API = "https://challenge.lexicondigital.com.au/api/filmworld", CINEMAWORLD_API = "https://challenge.lexicondigital.com.au/api/cinemaworld", ALLOWED_ORIGIN = "https://frontend.cf-prod.workers.dev"}
+vars = {FILMWORLD_API = "https://challenge.lexicondigital.com.au/api/filmworld", CINEMAWORLD_API = "https://challenge.lexicondigital.com.au/api/cinemaworld", ALLOWED_ORIGIN = "https://princes-site.prod-cf.workers.dev"}
 workers_dev = true
 zone_id = ""
 
